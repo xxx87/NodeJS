@@ -42,15 +42,47 @@ server.listen(port, (err) => {
     console.log(`server is listening on ${port}`)
 })*/
 
+// const express = require('express')
+// const app = express()
+// const port = 3000
+// app.get('/', (request, response) => {
+//     response.send('Hello from Express!')
+// })
+// app.listen(port, (err) => {
+//     if (err) {
+//         return console.log('something bad happened', err)
+//     }
+//     console.log(`server is listening on ${port}`)
+// })
+
 const express = require('express')
 const app = express()
-const port = 3000
+app.use((request, response, next) => {
+    request.data = 123
+    console.log('****** request.headers ******')
+    console.log(request.data)
+    console.log('****** request.headers ******')
+    next()
+})
+app.use((request, response, next) => {
+    request.chance = Math.random()
+    next()
+})
 app.get('/', (request, response) => {
-    response.send('Hello from Express!')
+    response.json({
+        otvet: request.chance
+    })
 })
-app.listen(port, (err) => {
-    if (err) {
-        return console.log('something bad happened', err)
-    }
-    console.log(`server is listening on ${port}`)
-})
+app.listen(3000)
+
+// const express = require('express')
+// const app = express()
+// app.get('/', (request, response) => {
+//     throw new Error('‘oops’')
+// })
+// app.use((err, request, response, next) => {
+//     // логирование ошибки, пока просто console.log
+//     console.log(err)
+//     response.status(500).send('‘Something broke!’')
+// })
+// app.listen(3000)
