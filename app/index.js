@@ -58,20 +58,20 @@ server.listen(port, (err) => {
 const express = require('express')
 const app = express()
 app.use((request, response, next) => {
-    request.data = 123
-    console.log('****** request.headers ******')
-    console.log(request.data)
-    console.log('****** request.headers ******')
-    next()
+	request.data = 123
+	console.log('****** request.headers ******')
+	console.log(request.data)
+	console.log('****** request.headers ******')
+	next()
 })
 app.use((request, response, next) => {
-    request.chance = Math.random()
-    next()
+	request.chance = Math.random()
+	next()
 })
 app.get('/', (request, response) => {
-    response.json({
-        otvet: request.chance
-    })
+	response.json({
+		otvet: request.chance
+	})
 })
 app.listen(3000)
 
