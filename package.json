@@ -1,11 +1,15 @@
 {
   "name": "nodejs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node learn",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xxx87/NodeJS.git"
   },
   "author": "",
   "license": "ISC",
