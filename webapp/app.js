@@ -38,7 +38,7 @@ app.get("/api/users/:id", function(req, res){
 app.post("/api/users", jsonParser, function (req, res) {
 
     if(!req.body) return res.sendStatus(400);
-
+    console.log(req.body);
     var userName = req.body.name;
     var userAge = req.body.age;
     var user = {name: userName, age: userAge};
