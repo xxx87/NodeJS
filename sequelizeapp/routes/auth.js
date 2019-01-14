@@ -17,10 +17,17 @@ module.exports = function(app) {
 		res.redirect('/signin');
 
 	}
-	app.post('/signin', passport.authenticate('local-signin', {
-			successRedirect: '/dashboard',
-			failureRedirect: '/signin'
-		}
-	));
+	app.post('/signin', passport.authenticate('local-signin'),
+ function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    console.log(res);
+    res.redirect('/dashboard');
+  }
+ // {
+	// 		successRedirect: '/dashboard',
+	// 		failureRedirect: re
+	// 	}
+	);
  app.get('/', authController.home);
 }
