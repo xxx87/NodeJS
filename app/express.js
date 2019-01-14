@@ -1,4 +1,82 @@
 const express = require("express");
+const nunjucks = require('nunjucks');
+const app = express();
+
+app.engine('html', nunjucks.render);
+nunjucks.configure(__dirname, {
+    express: app
+});
+
+app.set("view engine", "html");
+
+app.use("/contact", function(request, response){
+console.log(__dirname);
+    response.render("index.html", {
+					title: "My Doc",
+					isAdmin: true,
+				});
+});
+app.use("/", function(request, response){
+
+    response.send("Главная страница");
+});
+app.listen(3000);
+
+
+/*const express = require("express");
+
+const app = express();
+// создаем парсер для данных в формате json
+const jsonParser = express.json();
+
+app.post("/user", jsonParser, function (request, response) {
+	console.log(request.body);
+	if(!request.body) return response.sendStatus(400);
+	// console.log(request.body);
+	response.json(`${request.body.userName} - ${request.body.userAge}`);
+});
+
+app.get("/", function(request, response){
+
+	response.sendFile(__dirname + "/index.html");
+});
+
+app.listen(3000);
+*/
+
+/*
+const express = require("express");
+const app = express();
+
+// определяем Router
+const productRouter = express.Router();
+
+// определяем маршруты и их обработчики внутри роутера
+productRouter.use("/create", function(request, response){
+	response.send("Добавление товара");
+});
+productRouter.use("/:id", function(request, response){
+	response.send(`Товар ${request.params.id}`);
+});
+productRouter.use("/", function(request, response){
+	response.send("Список товаров");
+});
+// сопотавляем роутер с конечной точкой "/products"
+app.use("/products", productRouter);
+
+app.use("/about", function (request, response) {
+	response.send("О сайте");
+});
+
+app.use("/", function (request, response) {
+	response.send("Главная страница");
+});
+app.listen(3000);
+*/
+
+
+/*
+const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -21,6 +99,7 @@ app.get("/", function(request, response){
 });
 
 app.listen(3000);
+*/
 
 
 /*
