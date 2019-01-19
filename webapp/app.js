@@ -12,6 +12,9 @@ app.get("/api/users", function(req, res){
     var users = JSON.parse(content);
     res.send(users);
 });
+app.get("/api/send", function(req, res){
+    sendMail();
+});
 // получение одного пользователя по id
 app.get("/api/users/:id", function(req, res){
 
@@ -113,6 +116,34 @@ app.put("/api/users", jsonParser, function(req, res){
         res.status(404).send(user);
     }
 });
+
+let nodemailer = require('nodemailer');
+
+function sendMail() {
+    let transporter = nodemailer.createTransport({
+        "host": "smtp.ukr.net",
+        "port": 465,
+        "secure": true,
+        "auth": {
+            "user": "xxx_87@ukr.net",
+            "pass": "M1_P0chtA_Ukrnet"
+        }
+    });
+    const mailOptions = {
+        from: 'xxx_87@ukr.net', // sender address
+        to: 'isayev.ilya@gmail.com', // list of receivers
+        subject: 'Subject of your email', // Subject line
+        html: '<p>Your html here</p>'// plain text body
+    };
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err)
+            console.log(err)
+        else
+            console.log(info);
+    });
+};
+
+
 
 app.listen(3000, function(){
     console.log("Сервер ожидает подключения...");
