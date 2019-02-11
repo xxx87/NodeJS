@@ -8,6 +8,17 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 <body>
+<table id="table">
+    <tr>
+        <td>
+            <input id="txt" type="text">
+        </td>
+        <td>
+            <button type="submit" class="btn">Кнопка</button>
+        </td>
+    </tr>
+</table>
+<br>
     <h2>Список пользователей</h2>
     <form name="userForm">
         <input type="hidden" name="id" value="0" />
@@ -114,6 +125,16 @@
                 }
             })
         }
+        function SendMail() {
+            $.ajax({
+                url: "/api/send",
+                type: "GET",
+                contentType: "application/json",
+                success: function () {
+                    console.log('SUCCESS');
+                }
+            });
+        }
         // создание строки для таблицы
         var row = function (user) {
             return "<tr data-rowid='" + user.id + "'><td>" + user.id + "</td>" +
@@ -154,6 +175,29 @@
         // загрузка пользователей
         GetUsers();
 
+
+        var token = '480796358:AAGrFqxGfCkewRAfjFCg51ZefKfYak5Kq-U';
+        var chat_id = '522960474';
+        $(document).ready(function(){
+
+            $("#table").on('click', '.btn', function(){
+                var msg = document.getElementById('txt').value;
+                fetch("https://api.telegram.org/bot"+ token + "/sendMessage?chat_id=" + chat_id + "&parse_mode=html&text=" + msg)
+                  .then(resp => {
+                      SendMail();
+                  });
+                // $.ajax({
+                //     type: "POST",
+                //     url: "https://api.telegram.org/bot"+ token + "/sendMessage?chat_id=" + chat_id + "&parse_mode=html&text=" + msg,
+                //     dataType: 'json',
+                //     success: function(data1){
+                //     }
+                // });
+                return false;
+                event.preventDefault();
+            });
+
+        });
     </script>
 </body>
 </html>
