@@ -18,12 +18,13 @@ app.get("/api/send", function(req, res){
 // получение одного пользователя по id
 app.get("/api/users/:id", function(req, res){
     let id = req.params.id; // получаем id
+    console.log(id);
     let content = fs.readFileSync(__dirname + "/users.json", "utf8");
     let users = JSON.parse(content);
     let user = null;
     // находим в массиве пользователя по id
     for(let i=0; i<users.length; i++){
-        if(users[i].id === id){
+        if(users[i].id == id){
             user = users[i];
             break;
         }
